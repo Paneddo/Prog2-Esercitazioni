@@ -1,10 +1,10 @@
 {
 	"name": "Java",
-	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/base:latest",
 
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
-			"version": "none",
+			"version": "25",
 			"installMaven": "false",
 			"installGradle": "false"
 		}
