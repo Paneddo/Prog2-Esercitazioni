@@ -76,10 +76,15 @@ necessaria per lo svolgimento degli esercizi, o per il superamento dell'esame*,
 perché sono completamente predisposti e configurati dal docente, come illustrato
 nelle sezioni seguenti.
 
-L'unica cosa che è necessario fare è **installare il *Java Developer Kit*
-(JDK)** in una versione sufficientemente recente (la configurazione provvederà
-poi ad installre automaticamente sia la versione 21 del JDK che Gradle e
-Jubbiot/JUnit).
+Per utilizzare questo materiale sul suo computer è sufficiente:
+
+* installare la versione 25 del *Java Developer Kit* (JDK)**,
+* eseguire il *Gradle wrapper* con il comando `./gradlew test` (oppure
+  `gradlew.bat test` se usa Windows) dalla directory principale del materiale
+  scaricato;
+  
+alla prima esecuzione il wrapper provvederà poi ad installare automaticamente
+sia Gradle che Jubbiot e JUnit.
 
 ### Come compilare ed eseguire i test e il codice
 
