@@ -78,13 +78,13 @@ nelle sezioni seguenti.
 
 Per utilizzare questo materiale sul suo computer è sufficiente:
 
-* installare la versione 25 del *Java Developer Kit* (JDK)**,
+* installare la **versione 25** del *Java Development Kit* (JDK),
 * eseguire il *Gradle wrapper* con il comando `./gradlew test` (oppure
   `gradlew.bat test` se usa Windows) dalla directory principale del materiale
   scaricato;
   
-alla prima esecuzione il wrapper provvederà poi ad installare automaticamente
-sia Gradle che Jubbiot e JUnit.
+alla prima esecuzione il wrapper provvederà ad installare automaticamente sia
+Gradle che Jubbiot e JUnit.
 
 ### Come compilare ed eseguire i test e il codice
 
