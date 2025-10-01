@@ -1,7 +1,10 @@
 plugins {
   id 'java'
   id 'jacoco'
+  id 'pmd'
+  id 'checkstyle'
   id 'com.diffplug.spotless' version '8.0.0'
+  id 'org.cthing.locc' version '2.1.0'
 }
 
 java {
@@ -72,7 +75,7 @@ javadoc {
     encoding = 'UTF-8'
     charSet = 'UTF-8'
     links = [ 'https://docs.oracle.com/en/java/javase/25/docs/api/' ]
-    docTitle = 'Programmazione II @ UniMI'
+    docTitle = 'Handouts — Programmazione II @ UniMI'
     overview = 'src/overview.html'
     header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
     docletpath = configurations.umlDoclet.files.asType(List)
@@ -87,7 +90,7 @@ javadoc {
 spotless {
   enforceCheck = false
   java {
-    googleJavaFormat('1.24.0')
+    googleJavaFormat('1.28.0')
     removeUnusedImports()
     leadingTabsToSpaces(2)
     endWithNewline()
