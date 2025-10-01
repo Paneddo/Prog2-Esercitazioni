@@ -1,5 +1,6 @@
 plugins {
   id 'java'
+  id 'application'
   id 'jacoco'
   id 'com.diffplug.spotless' version '8.0.0'
   id 'org.cthing.locc' version '2.1.0'
@@ -30,18 +31,20 @@ dependencies {
   umlDoclet 'nl.talsmasoftware:umldoclet:2.2.0'
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
-  options.compilerArgs.add('-Xlint:all')
-  options.compilerArgs.add('-Werror') 
+  options.compilerArgs += ['-Xlint:all', '-Werror']
 }
 
-tasks.withType(JavaExec) {
+tasks.withType(JavaExec).configureEach {
   jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+  defaultCharacterEncoding = 'UTF-8'
+  enableAssertions = !providers.gradleProperty('disableAssertions').isPresent()
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
   jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+  defaultCharacterEncoding = 'UTF-8'
 }
 
 tasks.named('test') {
@@ -54,21 +57,13 @@ tasks.named('test') {
       }
     }
   }
-  defaultCharacterEncoding = 'UTF-8'
   finalizedBy jacocoTestReport
 }
 
-tasks.withType(JavaExec) {
-  enableAssertions = !providers.systemProperty('disableAssertions').isPresent()
-}
+def defaultMain = 'it.unimi.di.prog2.h02.SalveMondo'
 
-tasks.register('runClass', JavaExec) {
-  dependsOn build
-  group = 'Execution'
-  description = 'Runs the main method of a class given its fully qualified name.'
-  mainClass = providers.systemProperty('mainClass').getOrElse('my.pkg.Example')
-  classpath = sourceSets.main.runtimeClasspath
-  defaultCharacterEncoding = 'UTF-8'
+application {
+  mainClass = providers.gradleProperty('mainClass').getOrElse(defaultMain)
 }
 
 javadoc {
@@ -84,9 +79,9 @@ javadoc {
     docletpath = configurations.umlDoclet.files.asType(List)
     doclet = 'nl.talsmasoftware.umldoclet.UMLDoclet'
     showFromPrivate()
-    addBooleanOption 'Xdoclint:all', true
-    addBooleanOption 'Werror', true
-    addBooleanOption '-allow-script-in-comments', true
+    addBooleanOption('Xdoclint:all', true)
+    addBooleanOption('Werror', true)
+    addBooleanOption('-allow-script-in-comments', true)
   }
 }
 
@@ -97,7 +92,7 @@ spotless {
     removeUnusedImports()
     leadingTabsToSpaces(2)
     endWithNewline()
-    licenseHeaderFile 'src/licenseHeaderFile.txt'
+    licenseHeaderFile('src/licenseHeaderFile.txt')
   }
 }
 
