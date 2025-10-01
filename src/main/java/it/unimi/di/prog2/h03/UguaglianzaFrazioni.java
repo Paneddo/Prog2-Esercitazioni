@@ -21,6 +21,7 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.h03;
 
+/** Classe per la verifica dell'uguaglianza tra frazioni. */
 public class UguaglianzaFrazioni {
 
   /** . */
@@ -30,6 +31,8 @@ public class UguaglianzaFrazioni {
    * Riceve come parametri sulla linea di comando quattro interi corrispondenti rispettivamente a
    * numeratore e denominatore di due frazioni ed emette nel flusso d'uscita "uguali" se le frazioni
    * sono uguali, oppure "diverse".
+   *
+   * @param args i quattro interi
    */
   public static void main(String[] args) {
     int a = Integer.parseInt(args[0]);

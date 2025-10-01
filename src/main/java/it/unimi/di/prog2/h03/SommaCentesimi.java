@@ -23,6 +23,7 @@ package it.unimi.di.prog2.h03;
 
 import java.util.Scanner;
 
+/** Classe per la somma di importi in centesimi. */
 public class SommaCentesimi {
 
   /** . */
@@ -32,6 +33,8 @@ public class SommaCentesimi {
    * Legge dal flusso di ingresso un elenco di importi in euro e centesimi (uno per riga, con la
    * parte decimale separata dalla parte intera da un punto) e ne emette nel flusso d'uscita la
    * somma.
+   *
+   * @param args gli argomenti (ignorati) della riga di comando
    */
   public static void main(String[] args) {
     double total = 0;
