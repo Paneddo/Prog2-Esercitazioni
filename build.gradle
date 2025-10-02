@@ -25,7 +25,7 @@ configurations {
 }
 
 dependencies {
-  testImplementation 'it.unimi.di.prog2:jubbiot:0.4a0'
+  testImplementation 'it.unimi.di.prog2:jubbiot:0.4a1'
   testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   umlDoclet 'nl.talsmasoftware:umldoclet:2.2.3'
