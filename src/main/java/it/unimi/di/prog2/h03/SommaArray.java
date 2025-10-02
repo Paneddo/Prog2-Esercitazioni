@@ -26,7 +26,7 @@ import java.util.Scanner;
 /** Classe per calcolare la somma degli elementi di un array. */
 public class SommaArray {
 
-  /** Costruttore privato per impedire l'instanziazione della classe. */
+  /** Costruttore privato per impedire l'istanziazione della classe. */
   private SommaArray() {}
 
   /**
@@ -44,7 +44,7 @@ public class SommaArray {
   }
 
   /**
-   * Legge dal flusso in igresso al più 10 interi e ne emette la somma nel flusso d'uscita.
+   * Legge dal flusso in ingresso al più 10 interi e ne emette la somma nel flusso d'uscita.
    *
    * @param args parametri da linea di comando (non usati).
    */
