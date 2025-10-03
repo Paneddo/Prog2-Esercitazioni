@@ -23,12 +23,28 @@ package it.unimi.di.prog2.e03;
 
 /** Classe per la verifica dell'uguaglianza tra frazioni. */
 public class UguaglianzaFrazioni {
-  /** Costruttore privato per impedire l'istanziazione. */
-  private UguaglianzaFrazioni() {}
+    /** Costruttore privato per impedire l'instanziazione. */
+    private UguaglianzaFrazioni() {
+    }
 
-  /**
-   * Scrivere il metodo main che riceva come parametri sulla linea di comando quattro interi
-   * corrispondenti rispettivamente a numeratore e denominatore di due frazioni ed emetta nel flusso
-   * d'uscita "uguali" se le frazioni sono uguali, oppure "diverse".
-   */
+    /**
+     * Scrivere il metodo main che riceva come parametri sulla linea di comando
+     * quattro interi
+     * corrispondenti rispettivamente a numeratore e denominatore di due frazioni ed
+     * emetta nel flusso
+     * d'uscita "uguali" se le frazioni sono uguali, oppure "diverse".
+     */
+
+    public static void main(String[] args) {
+        /**
+         * a / b
+         * c / d
+         */
+
+        int a = Integer.parseInt(args[0]);
+        int b = Integer.parseInt(args[1]);
+        int c = Integer.parseInt(args[2]);
+        int d = Integer.parseInt(args[3]);
+        System.out.println(a * d == b * c ? "uguali" : "diverse");
+    }
 }
