@@ -1,1 +1,4 @@
-../BandieraVector/input-1.txt
+nove
+uno
+quattro
+cinque

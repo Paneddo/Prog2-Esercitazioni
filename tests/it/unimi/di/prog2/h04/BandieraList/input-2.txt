@@ -1,1 +1,6 @@
-../BandieraVector/input-2.txt
+a
+ab
+abc
+abcd
+abcde
+abcdef
