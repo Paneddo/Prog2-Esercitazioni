@@ -2,9 +2,17 @@ plugins {
   id 'java'
   id 'application'
   id 'jacoco'
+  id 'pmd'
+  id 'checkstyle'
   id 'com.diffplug.spotless' version '8.0.0'
   id 'org.cthing.locc' version '2.1.0'
+//  id 'com.atkinsondev.opentelemetry-build' version "4.5.0"
 }
+
+// openTelemetryBuild {
+//   endpoint = "http://localhost:4317"
+//   testSpans = false
+// }
 
 java {
   toolchain {
@@ -20,7 +28,17 @@ repositories {
   }
 }
 
+sourceSets {
+  scratch {
+    java { srcDirs = [ 'src/scratch/java' ] }
+    compileClasspath += sourceSets.main.output
+    runtimeClasspath += sourceSets.main.output
+  }
+}
+
 configurations {
+  scratchImplementation.extendsFrom implementation
+  scratchRuntimeOnly.extendsFrom runtimeOnly
   umlDoclet
 }
 
@@ -37,17 +55,17 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.withType(JavaExec).configureEach {
-  jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+  systemProperty 'user.language', 'ROOT'
+  systemProperty 'file.encoding', 'UTF-8'
   defaultCharacterEncoding = 'UTF-8'
+  classpath += sourceSets.scratch.runtimeClasspath
   enableAssertions = !providers.gradleProperty('disableAssertions').isPresent()
 }
 
-tasks.withType(Test).configureEach {
-  jvmArgs += ['-Duser.language=ROOT', '-Dfile.encoding=UTF-8']
+tasks.named('test', Test) {
+  systemProperty 'user.language', 'ROOT'
+  systemProperty 'file.encoding', 'UTF-8'
   defaultCharacterEncoding = 'UTF-8'
-}
-
-tasks.named('test') {
   useJUnitPlatform()
   testLogging {
     events 'skipped', 'failed'
@@ -66,7 +84,7 @@ application {
   mainClass = providers.gradleProperty('mainClass').getOrElse(defaultMain)
 }
 
-javadoc {
+tasks.named('javadoc', Javadoc) {
   exclude('utils/**', 'clients/**')
   options {
     description = 'Generates Javadoc API documentation and UML diagrams for the main source code.'
@@ -75,9 +93,9 @@ javadoc {
     links = [ 'https://docs.oracle.com/en/java/javase/25/docs/api/' ]
     docTitle = 'Handouts — Programmazione II @ UniMI'
     overview = 'src/overview.html'
-    header = '<script type=\'text/javascript\' src=\'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\'></script>'
-    docletpath = configurations.umlDoclet.files.asType(List)
+    header = "<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>"
     doclet = 'nl.talsmasoftware.umldoclet.UMLDoclet'
+    docletpath = configurations.umlDoclet.files.asType(List)
     showFromPrivate()
     addBooleanOption('Xdoclint:all', true)
     addBooleanOption('Werror', true)
@@ -102,6 +120,6 @@ tasks.register('cleanActual', Delete) {
   }
 }
 
-clean {
+tasks.named('clean') {
   dependsOn cleanActual
 }
