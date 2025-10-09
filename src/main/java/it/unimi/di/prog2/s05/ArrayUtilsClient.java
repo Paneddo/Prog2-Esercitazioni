@@ -19,7 +19,9 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.e05;
+package it.unimi.di.prog2.s05;
+
+import java.util.Scanner;
 
 /** Client for the {@link ArrayUtils} class. */
 public class ArrayUtilsClient {
@@ -27,8 +29,22 @@ public class ArrayUtilsClient {
   /** . */
   private ArrayUtilsClient() {}
 
-  /*
-   * Write a client that reads 10 integers in increasing order from the standard input and prints
-   * the index of the integer passed as argument on the command line if found.
+  /** The fixed size of the input and array. */
+  private static final int SIZE = 10;
+
+  /**
+   * Reads 10 integers in increasing order from the standard input and prints the index of the
+   * integer passed as argument on the command line if found.
+   *
+   * @param args the value to search for.
    */
+  public static void main(String[] args) {
+
+    int[] array = new int[SIZE];
+    try (Scanner scanner = new Scanner(System.in)) {
+      for (int i = 0; i < SIZE; i++) array[i] = scanner.nextInt();
+    }
+    int index = ArrayUtils.binarySearch(array, Integer.parseInt(args[0]));
+    if (index >= 0) System.out.println(index);
+  }
 }
