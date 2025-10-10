@@ -1,1 +1,2 @@
-../../e03/SommaCentesimi/input-1.txt
+0.01
+0.02

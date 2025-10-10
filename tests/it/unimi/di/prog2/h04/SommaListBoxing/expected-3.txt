@@ -1,1 +1,1 @@
-../SommaList/expected-3.txt
+60
