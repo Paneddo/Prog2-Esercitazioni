@@ -24,13 +24,41 @@ package it.unimi.di.prog2.e05;
 /** Classe di metodi di utilità per array. */
 public class ArrayUtils {
 
-  /** . */
-  private ArrayUtils() {}
+    /** . */
+    private ArrayUtils() {
+    }
 
-  /*
-   * Specify and implement a method that given a sorted array of integers and a
-   * value, returns the index of the value if it is present in the array.
-   *
-   * Hint: https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/
-   */
+    /*
+     * Specify and implement a method that given a sorted array of integers and a
+     * value, returns the index of the value if it is present in the array.
+     *
+     * Hint:
+     * https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-
+     * searches-and-mergesorts-are-broken/
+     */
+
+    /**
+     * Funzione che svolge una ricerca binaria.
+     * 
+     * @param array l'array su cui effettuare la ricerca, deve essere ordinato e non
+     *              {@code null}
+     * @param value il valore da cercare
+     * @return l'indice dell'elemento cercato, -1 se non trovato
+     */
+    public static int binarySearch(int[] array, int value) {
+        int low = 0;
+        int high = array.length - 1;
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            if (array[mid] == value) {
+                return mid;
+            } else if (array[mid] < value) {
+                low = mid + 1;
+            } else {
+                high = low - 1;
+            }
+        }
+
+        return -1;
+    }
 }

@@ -24,23 +24,34 @@ package it.unimi.di.prog2.e06;
 /** Utility class for computing mathematical functions. */
 public class MathFunctions {
 
-  /** . */
-  private MathFunctions() {}
+    /** . */
+    private MathFunctions() {
+    }
 
-  /**
-   * Extracts (if possible) the square root of the given number.
-   *
-   * <p>Partial function which, when the argument is non-negative, returns an approximation
-   * {@literal \( y \)} of the square root in the sense that {@literal \( |y^2 - x| < 10^{-3} \)}.
-   *
-   * @param x the number whose square root is to be extracted; must be non-negative.
-   * @return an approximation of the square root.
-   */
-  public static double sqrt(double x) {
+    /**
+     * Extracts (if possible) the square root of the given number.
+     *
+     * <p>
+     * Partial function which, when the argument is non-negative, returns an
+     * approximation
+     * {@literal \( y \)} of the square root in the sense that {@literal \( |y^2 -
+     * a| < 10^{-3} \)}.
+     *
+     * @param a the number whose square root is to be extracted; must be
+     *          non-negative.
+     * @return an approximation of the square root.
+     */
 
-    // Provide an alternative implementation based on Newton's method.
-    // Hint: https://math.mit.edu/~stevenj/18.335/newton-sqrt.pdf
+    public static double sqrt(double a) {
+        /*
+         * Newton's method.
+         * https://math.mit.edu/~stevenj/18.335/newton-sqrt.pdf
+         */
 
-    return 0;
-  }
+        double x = a / 2;
+        while (Math.abs(x * x - a) > 0.001) {
+            x = (x + a / x) / 2;
+        }
+        return x;
+    }
 }

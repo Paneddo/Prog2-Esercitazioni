@@ -21,14 +21,32 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e05;
 
+import java.util.Scanner;
+
 /** Client for the {@link MathFunctions} class. */
 public class MathFunctionsClient {
 
-  /** . */
-  private MathFunctionsClient() {}
+	/** . */
+	private MathFunctionsClient() {
+	}
 
-  /* Write a client that reads a sequence of floating-point numbers from standard input, computes their square root
-   * (when possible), and prints {@code true} or {@code false} depending on whether the result is
-   * correct within {@code 10^-3} or not.
-   */
+	/*
+	 * Write a client that reads a sequence of floating-point numbers from standard
+	 * input, computes their square root
+	 * (when possible), and prints {@code true} or {@code false} depending on
+	 * whether the result is correct within {@code 10^-3} or not.
+	 */
+	public static void main(String[] args) {
+		try (Scanner sc = new Scanner(System.in)) {
+			while (sc.hasNextDouble()) {
+				double n = sc.nextDouble();
+				double result = MathFunctions.sqrt(n);
+				if (result != -1) {
+					System.out.println(Math.abs(result * result - n) <= 0.001);
+				} else {
+					System.out.println(false);
+				}
+			}
+		}
+	}
 }
