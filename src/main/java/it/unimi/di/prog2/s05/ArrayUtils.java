@@ -40,7 +40,7 @@ public class ArrayUtils {
    *       iff {@code haystack} contains {@code needle}.
    * </ul>
    */
-  @SuppressWarnings("doclint:missing") // this is because we are still Lisokv' style
+  @SuppressWarnings("doclint:missing") // this is because we are still Liskov style
   static int binarySearch(final int[] haystack, final int needle) {
     int lo = 0;
     int hi = haystack.length - 1;

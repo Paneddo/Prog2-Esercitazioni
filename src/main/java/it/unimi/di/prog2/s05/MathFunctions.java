@@ -39,7 +39,7 @@ public class MathFunctions {
   @SuppressWarnings("doclint:missing") // this is because we are still Lisokv' style
   public static double sqrt(double x) {
     double low = 0, high = x > 1 ? x : 1, mid = -1;
-    while (high - low > .00001) {
+    while (high - low > .000001) { // this is (10^-3)^2
       mid = (high + low) / 2;
       if (mid * mid - x < 0) low = mid;
       else high = mid;

@@ -19,30 +19,32 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.s06;
+package it.unimi.di.prog2.h06;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-/** Client for the {@link MathFunctions} class. */
-public class MathFunctionsClient {
+/** Classe client per {} */
+public class ListUtilsClient {
 
   /** . */
-  private MathFunctionsClient() {}
+  private ListUtilsClient() {}
+  ;
 
   /**
-   * Reads a sequence of floating-point numbers from standard input, computes their square root
-   * (when possible), and prints {@code true} or {@code false} depending on whether the result is
-   * correct within {@code 10^-3} or not.
+   * Legge dal flusso di ingresso una lista di stringhe in ordine lessicografico e stampa l'indice
+   * della stringa passata come argomento sulla linea di comando, oppure -1 se tale stringa non
+   * compare nella lista.
    *
-   * @param args the command line arguments (ignored).
+   * @param args il primo elemento dell'array è la stringa da cercare (ci deve essere almeno un
+   *     argomento).
    */
   public static void main(String[] args) {
-    try (Scanner s = new Scanner(System.in)) {
-      while (s.hasNextDouble()) {
-        double x = s.nextDouble();
-        double y = MathFunctions.sqrt(x);
-        System.out.println(Math.abs(y * y - x) < 0.001);
-      }
+    List<String> stringhe = new ArrayList<>();
+    try (Scanner sc = new Scanner(System.in)) {
+      while (sc.hasNext()) stringhe.add(sc.next());
     }
+    System.out.println(ListUtils.binarySearch(stringhe, args[0]));
   }
 }
