@@ -36,6 +36,12 @@ public class MathFunctionsClient {
 	 * (when possible), and prints {@code true} or {@code false} depending on
 	 * whether the result is correct within {@code 10^-3} or not.
 	 */
+
+	/**
+	 * Main method.
+	 * 
+	 * @param args Command line arguments (ignored)
+	 */
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in)) {
 			while (sc.hasNextDouble()) {

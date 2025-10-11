@@ -27,7 +27,7 @@ public class UguaglianzaFrazioni {
     private UguaglianzaFrazioni() {
     }
 
-    /**
+    /*
      * Scrivere il metodo main che riceva come parametri sulla linea di comando
      * quattro interi
      * corrispondenti rispettivamente a numeratore e denominatore di due frazioni ed
@@ -35,8 +35,13 @@ public class UguaglianzaFrazioni {
      * d'uscita "uguali" se le frazioni sono uguali, oppure "diverse".
      */
 
+    /**
+     * Main method.
+     * 
+     * @param args Command line arguments: a b c d per le frazioni a/b e c/d
+     */
     public static void main(String[] args) {
-        /**
+        /*
          * a / b
          * c / d
          */

@@ -30,12 +30,18 @@ public class SommaCentesimi {
     private SommaCentesimi() {
     }
 
-    /**
+    /*
      * Scrivere il metodo main che legga dal flusso di ingresso un elenco di importi
      * in euro e
      * centesimi (uno per riga, con la parte decimale separata dalla parte intera da
      * un punto) e ne
      * emetta nel flusso d'uscita la somma.
+     */
+
+    /**
+     * Main method.
+     * 
+     * @param args Command line arguments (ignored)
      */
 
     public static void main(String[] args) {
@@ -44,9 +50,6 @@ public class SommaCentesimi {
         try (Scanner sc = new Scanner(System.in)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                if (line.isEmpty()) {
-                    break;
-                }
                 String[] vals = line.split("\\.");
                 if (vals.length == 2) {
                     somma += Integer.parseInt(vals[0]) * 100;

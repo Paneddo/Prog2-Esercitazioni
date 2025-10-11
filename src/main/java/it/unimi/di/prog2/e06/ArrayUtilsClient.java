@@ -37,6 +37,12 @@ public class ArrayUtilsClient {
    * keeping the array sorted and of the same size (discarding the last element
    * at every insertion). Finally, prints the array.
    */
+
+  /**
+   * Main method.
+   * 
+   * @param args Command line arguments: {@code args[0]} the size of the array
+   */
   public static void main(String[] args) {
 
     int size = Integer.parseInt(args[0]);

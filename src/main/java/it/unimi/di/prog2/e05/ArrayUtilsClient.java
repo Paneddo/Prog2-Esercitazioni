@@ -36,6 +36,12 @@ public class ArrayUtilsClient {
      * line if found.
      */
 
+    /**
+     * Main method.
+     * 
+     * @param args Command line arguments: {@code args[0]} the integer to search for
+     */
+
     public static void main(String[] args) {
         int[] array = new int[10];
         try (Scanner sc = new Scanner(System.in)) {

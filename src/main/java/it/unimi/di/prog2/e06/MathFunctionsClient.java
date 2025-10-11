@@ -38,6 +38,11 @@ public class MathFunctionsClient {
      * correct within {@code 10^-3} or not.
      */
 
+    /**
+     * Main method.
+     * 
+     * @param args Command line arguments (ignored)
+     */
     public static void main(String[] args) {
         try (Scanner s = new Scanner(System.in)) {
             while (s.hasNextDouble()) {
