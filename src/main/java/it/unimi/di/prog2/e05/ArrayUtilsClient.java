@@ -46,7 +46,11 @@ public class ArrayUtilsClient {
         int[] array = new int[10];
         try (Scanner sc = new Scanner(System.in)) {
             for (int i = 0; i < array.length; i++) {
-                array[i] = sc.nextInt();
+                if (sc.hasNextInt()) {
+                    array[i] = sc.nextInt();
+                } else {
+                    return;
+                }
             }
         }
         int val = Integer.parseInt(args[0]);

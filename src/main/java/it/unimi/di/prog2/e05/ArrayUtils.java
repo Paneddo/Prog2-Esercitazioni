@@ -49,13 +49,13 @@ public class ArrayUtils {
         int low = 0;
         int high = array.length - 1;
         while (low <= high) {
-            int mid = (low + high) >>> 1;
+            int mid = low + (high - low) / 2;
             if (array[mid] == value) {
                 return mid;
-            } else if (array[mid] < value) {
+            } else if (value > array[mid]) {
                 low = mid + 1;
             } else {
-                high = low - 1;
+                high = mid - 1;
             }
         }
 
