@@ -19,17 +19,7 @@ repositories {
   }
 }
 
-sourceSets {
-  scratch {
-    java { srcDirs = [ 'src/scratch/java' ] }
-    compileClasspath += sourceSets.main.output
-    runtimeClasspath += sourceSets.main.output
-  }
-}
-
 configurations {
-  scratchImplementation.extendsFrom implementation
-  scratchRuntimeOnly.extendsFrom runtimeOnly
   umlDoclet
 }
 
@@ -49,7 +39,6 @@ tasks.withType(JavaExec).configureEach {
   systemProperty 'user.language', 'ROOT'
   systemProperty 'file.encoding', 'UTF-8'
   defaultCharacterEncoding = 'UTF-8'
-  classpath += sourceSets.scratch.runtimeClasspath
   enableAssertions = !providers.gradleProperty('disableAssertions').isPresent()
 }
 
@@ -76,7 +65,6 @@ application {
 }
 
 tasks.named('javadoc', Javadoc) {
-  exclude('utils/**', 'clients/**')
   options {
     description = 'Generates Javadoc API documentation and UML diagrams for the main source code.'
     encoding = 'UTF-8'
