@@ -164,3 +164,17 @@ La valutazione delle risposte fornite dall'AI è **esclusivamente indicativa** e
 non è affatto garantito che rispecchi la valutazione finale dell'esame; può ciò
 nonostante essere un accettabile punto di partenza per valutare la propria
 preparazione e la propria capacita di comunicare in modo chiaro e completo.
+
+## E la musica?
+
+<p align="center">
+  <img src="playlist.png" alt="Playlist" width="50%">
+</p>
+
+La programmazione è una attività che richiede concentrazione e creatività; per
+questa ragione, durante lo studio può essere piacevole ascoltare della musica di
+sottofondo. Durante gli anni del COVID-19, per favorire uno spirito di comunità
+tra gli studenti che seguivano le lezioni da remoto, è stata creata una
+[playlist collaborativa su Spotify](https://open.spotify.com/playlist/5QQTMaythfONej0KZMvqqY)
+in cui chiunque poteva aggiungere i propri brani preferiti. 
+
