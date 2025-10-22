@@ -27,44 +27,61 @@ import java.util.Scanner;
 public class SparsePolyClient {
 
   /** . */
-  private SparsePolyClient() {}
+  private SparsePolyClient() {
+  }
 
   /**
    * Returns a string representation of the given polynomial.
    *
-   * @param poly the polynomial to represent as a string, must not be {@code null}.
+   * @param poly the polynomial to represent as a string, must not be
+   *             {@code null}.
    * @return a string representation of the polynomial.
    */
   private static String asString(SparsePoly poly) {
     if (poly.degree() > 0) {
       StringBuilder sb = new StringBuilder("SparsePoly: ");
       int c = poly.coeff(poly.degree());
-      if (c < -1) sb.append("-" + (-c));
-      else if (c == -1) sb.append("-");
-      else if (c > 1) sb.append(c);
+      if (c < -1)
+        sb.append("-" + (-c));
+      else if (c == -1)
+        sb.append("-");
+      else if (c > 1)
+        sb.append(c);
       sb.append("x" + (poly.degree() > 1 ? "^" + poly.degree() : ""));
       for (int d = poly.degree() - 1; d > 0; d--) {
         c = poly.coeff(d);
-        if (c == 0) continue;
-        if (c < -1) sb.append(" - " + (-c));
-        else if (c == -1) sb.append(" - ");
-        else if (c == 1) sb.append(" + ");
-        else sb.append(" + " + c);
+        if (c == 0)
+          continue;
+        if (c < -1)
+          sb.append(" - " + (-c));
+        else if (c == -1)
+          sb.append(" - ");
+        else if (c == 1)
+          sb.append(" + ");
+        else
+          sb.append(" + " + c);
         sb.append("x" + (d > 1 ? "^" + d : ""));
       }
       c = poly.coeff(0);
-      if (c > 0) sb.append(" + " + c);
-      else if (c < 0) sb.append(" - " + (-c));
+      if (c > 0)
+        sb.append(" + " + c);
+      else if (c < 0)
+        sb.append(" - " + (-c));
       return sb.toString();
-    } else return "SparsePoly: " + poly.coeff(0);
+    } else
+      return "SparsePoly: " + poly.coeff(0);
   }
 
   /**
    * Tests some methods of {@link SparsePoly}.
    *
-   * <p>Starting from term \( t_0 = x + 1 \) reads a list of \( t_i \) of terms from the standard
-   * input, given as a (coefficient, degree) pairs, and computes the polynomials \( p_{i+1} = p_i
-   * \codt t_i + t_i \) emitting the last computed polynomial in the standard output.
+   * <p>
+   * Starting from term \( t_0 = x + 1 \) reads a list of \( t_i \) of terms from
+   * the standard
+   * input, given as a (coefficient, degree) pairs, and computes the polynomials
+   * \( p_{i+1} = p_i
+   * \codt t_i + t_i \) emitting the last computed polynomial in the standard
+   * output.
    *
    * @param args not used.
    */
@@ -76,6 +93,6 @@ public class SparsePolyClient {
         result = result.mul(term).add(term);
       }
     }
-    System.out.println(asString(result));
+    System.out.println(result.toString());
   }
 }
