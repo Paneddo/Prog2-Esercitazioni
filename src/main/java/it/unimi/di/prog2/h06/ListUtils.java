@@ -42,7 +42,7 @@ public class ListUtils {
    * @return l'indice corrispondente alla stringa cercata, oppure {@code -1}.
    */
   public static int binarySearch(List<String> haystack, String needle) {
-    int lo = 0, high = haystack.size();
+    int lo = 0, high = haystack.size() - 1;
     while (lo <= high) {
       int mid = lo + high >>> 1;
       String midString = haystack.get(mid);

@@ -19,8 +19,9 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.h09;
+package it.unimi.di.prog2.h10;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -33,9 +34,22 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
   /** The array of coefficients, the {@code coeff[i]} is the coefficient of \( x^i \). */
   private final int[] coefficient;
 
+  /*
+   * RI:
+   *
+   *  - coefficient != null
+   *  - if coefficient.length > 0, coefficient[coefficient.length - 1] != 0
+   *
+   * AF:
+   *
+   *  - the polynomial 0 is represented by an array of length 0,
+   *  - a polynomial of degree n is represented by an array of length n+1,
+   *    where coefficient[i] is the coefficient of x^i.
+   */
+
   /** Initializes this to be the zero polynomial, that is \( p = 0 \). */
   public DensePoly() {
-    coefficient = new int[1];
+    coefficient = new int[0];
   }
 
   /**
@@ -47,30 +61,44 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    */
   public DensePoly(int c, int n) throws IllegalArgumentException {
     if (n < 0) throw new IllegalArgumentException("Can't create a monomial with negative exponent");
-    if (c == 0) n = 0;
-    coefficient = new int[n + 1];
-    coefficient[n] = c;
+    if (c == 0) {
+      coefficient = new int[0];
+    } else {
+      coefficient = new int[n + 1];
+      coefficient[n] = c;
+    }
   }
 
   /**
-   * Initializes a polynomial of given degree (with all coefficients equal to 0).
+   * Initializes a polynomial given an array of coefficients.
    *
-   * @param n the degree, must be non-negative.
+   * <p>The coefficient array can have trailing zeros, they will not be considered in the
+   * representation of the polynomial.
+   *
+   * @param coefficient the array of coefficients.
    */
-  private DensePoly(int n) {
-    coefficient = new int[n + 1];
+  public DensePoly(int[] coefficient) {
+    Objects.requireNonNull(coefficient, "The coefficient array must not be null.");
+    if (coefficient.length == 0) {
+      this.coefficient = new int[0];
+    } else {
+      int degree = coefficient.length - 1;
+      while (degree >= 0 && coefficient[degree] == 0) degree--;
+      this.coefficient = Arrays.copyOf(coefficient, degree + 1);
+    }
   }
 
   /**
    * Returns the degree of this polynomial.
    *
-   * <p>The degree is defined as the largest exponent with a non-zero coefficient, except for the
-   * zero polynomial, whose degree is defined to be 0.
+   * <p>The degree is defined as the largest exponent with a non-zero coefficient.
    *
-   * @return the largest exponent with a non-zero coefficient; returns 0 if this is the zero {@code
-   *     Poly}.
+   * @return the largest exponent with a non-zero coefficient.
+   * @throws IllegalStateException if this is the zero polynomial.
    */
   public int degree() {
+    if (coefficient.length == 0)
+      throw new IllegalStateException("The zero polynomial has no degree.");
     return coefficient.length - 1;
   }
 
@@ -91,7 +119,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    * @return {@code true} if this polynomial is the zero polynomial, {@code false} otherwise.
    */
   public boolean isZero() {
-    return coefficient.length == 1 && coefficient[0] == 0;
+    return coefficient.length == 0;
   }
 
   /**
@@ -115,18 +143,12 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
       larger = q;
       smaller = this;
     }
-    int resultDegree = larger.degree();
-    if (degree() == q.degree()) {
-      for (int k = degree(); k > 0; k--)
-        if (coefficient[k] + q.coefficient[k] != 0) break;
-        else resultDegree--;
-    }
-    DensePoly result = new DensePoly(resultDegree); // get a new Poly
-    int i;
-    for (i = 0; i <= smaller.degree() && i <= resultDegree; i++)
-      result.coefficient[i] = smaller.coefficient[i] + larger.coefficient[i];
-    for (int j = i; j <= resultDegree; j++) result.coefficient[j] = larger.coefficient[j];
-    return result;
+    int[] result = new int[larger.degree() + 1];
+    int i, j;
+    for (i = 0; i <= smaller.degree(); i++)
+      result[i] = smaller.coefficient[i] + larger.coefficient[i];
+    for (j = i; j <= larger.degree(); j++) result[j] = larger.coefficient[j];
+    return new DensePoly(result);
   }
 
   /**
@@ -141,11 +163,11 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
   public DensePoly mul(DensePoly q) throws NullPointerException {
     Objects.requireNonNull(q, "The polynomial must not be null.");
     if (isZero() || q.isZero()) return new DensePoly();
-    DensePoly r = new DensePoly(degree() + q.degree());
+    int[] result = new int[degree() + q.degree() + 1];
     for (int i = 0; i <= degree(); i++)
       for (int j = 0; j <= q.degree(); j++)
-        r.coefficient[i + j] = r.coefficient[i + j] + coefficient[i] * q.coefficient[j];
-    return r;
+        result[i + j] = result[i + j] + coefficient[i] * q.coefficient[j];
+    return new DensePoly(result);
   }
 
   /**
@@ -173,8 +195,8 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    */
   public DensePoly minus() {
     if (isZero()) return this;
-    DensePoly r = new DensePoly(degree());
-    for (int i = 0; i <= degree(); i++) r.coefficient[i] = -coefficient[i];
-    return r;
+    int[] result = new int[coefficient.length];
+    for (int i = 0; i <= degree(); i++) result[i] = -coefficient[i];
+    return new DensePoly(result);
   }
 }

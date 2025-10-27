@@ -19,7 +19,7 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.h08;
+package it.unimi.di.prog2.h10;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +39,22 @@ public class ArrayIntSet {
   /** The {@link List} containing this set elements. */
   private int[] els;
 
-  /** The number of elements in this set. */
+  /** The number of e\lements in this set. */
   private int size;
+
+  /*
+   * RI:
+   *
+   * - els != null
+   * - els.length >= size
+   * - size >= 0
+   * - for all 0 <= i != j < size, els[i] != els[j]
+   *
+   * AF:
+   *
+   *  - represents the set S = { els[0], els[1], ..., els[size-1] }
+   *
+   */
 
   // Constructors
 

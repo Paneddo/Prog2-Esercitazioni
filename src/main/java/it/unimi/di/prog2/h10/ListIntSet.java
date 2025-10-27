@@ -19,9 +19,9 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.h08;
+package it.unimi.di.prog2.h10;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,18 +29,25 @@ import java.util.List;
  *
  * <p>A typical IntSet is \( S = \{x_1, \ldots, x_n \} \).
  */
-public class ArrayIntSet {
+public class ListIntSet {
 
   // Fields
 
-  /** The initial capacity of the internal array. */
-  private static final int INITIAL_CAPACITY = 16;
-
   /** The {@link List} containing this set elements. */
-  private int[] els;
+  private final List<Integer> els;
 
-  /** The number of elements in this set. */
-  private int size;
+  /*
+   * RI:
+   *
+   * - els != null
+   * - els do not contain null elements
+   * - for all 0 <= i != j < els.size(), els.get(i) != els.get(j)
+   *
+   * AF:
+   *
+   * - represents the set S = { els.get(0), els.get(1), ..., els.get(els.size()-1) }
+   *
+   */
 
   // Constructors
 
@@ -49,9 +56,8 @@ public class ArrayIntSet {
    *
    * <p>Builds the set \( S = \varnothing \).
    */
-  public ArrayIntSet() {
-    els = new int[INITIAL_CAPACITY];
-    size = 0;
+  public ListIntSet() {
+    els = new ArrayList<>();
   }
 
   // Methods
@@ -60,14 +66,11 @@ public class ArrayIntSet {
    * Looks for a given element in this set.
    *
    * @param x the element to look for.
-   * @return an index {@code i} such that {@code els[i] == x} if the element belongs to this set, or
+   * @return the index where {@code x} appears in {@code els} if the element belongs to this set, or
    *     -1
    */
-  private int indexOf(int x) {
-    for (int i = 0; i < size; i++) {
-      if (els[i] == x) return i;
-    }
-    return -1;
+  private int getIndex(int x) {
+    return els.indexOf(x);
   }
 
   /**
@@ -78,9 +81,7 @@ public class ArrayIntSet {
    * @param x the element to be added.
    */
   public void insert(int x) {
-    if (indexOf(x) != -1) return;
-    if (size == els.length) els = Arrays.copyOf(els, els.length * 2);
-    els[size++] = x;
+    if (getIndex(x) < 0) els.add(x);
   }
 
   /**
@@ -91,9 +92,11 @@ public class ArrayIntSet {
    * @param x the element to be removed.
    */
   public void remove(int x) {
-    int i = indexOf(x);
-    if (i == -1) return;
-    els[i] = els[--size];
+    int i = getIndex(x);
+    if (i < 0) return;
+    int last = els.size() - 1;
+    els.set(i, els.get(last));
+    els.remove(last);
   }
 
   /**
@@ -105,7 +108,7 @@ public class ArrayIntSet {
    * @return whether the given element belongs to this set, or not.
    */
   public boolean isIn(int x) {
-    return indexOf(x) != -1;
+    return getIndex(x) != -1;
   }
 
   /**
@@ -116,7 +119,7 @@ public class ArrayIntSet {
    * @return the size of this set.
    */
   public int size() {
-    return size;
+    return els.size();
   }
 
   /**
@@ -126,7 +129,7 @@ public class ArrayIntSet {
    * @throws IllegalStateException if this set is empty.
    */
   public int choose() throws IllegalStateException {
-    if (size == 0) throw new IllegalStateException("Can't choose from an empty set");
-    return els[0];
+    if (els.isEmpty()) throw new IllegalStateException("Can't choose from an empty set");
+    return els.get(els.size() - 1);
   }
 }
