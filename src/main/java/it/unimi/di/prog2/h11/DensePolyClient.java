@@ -42,7 +42,7 @@ public class DensePolyClient {
     DensePoly result = DensePoly.ZERO;
     try (Scanner s = new Scanner(System.in)) {
       while (s.hasNextInt()) {
-        DensePoly term = DensePoly.of(s.nextInt(), s.nextInt());
+        DensePoly term = DensePoly.ofCoefficientDegree(s.nextInt(), s.nextInt());
         result = result.add(term);
       }
     }

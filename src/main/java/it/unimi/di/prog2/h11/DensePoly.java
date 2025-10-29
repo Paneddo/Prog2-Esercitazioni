@@ -87,7 +87,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    * @param coefficient the array of coefficients.
    * @return the polynomial represented by the given array of coefficients.
    */
-  public static DensePoly of(int[] coefficient) {
+  public static DensePoly ofCoefficients(int[] coefficient) {
     Objects.requireNonNull(coefficient, "The coefficient array must not be null.");
     int degree = coefficient.length - 1;
     while (degree >= 0 && coefficient[degree] == 0) degree--;
@@ -102,7 +102,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    * @return the polynomial \( p = cx^n \).
    * @throws IllegalArgumentException if {@code n} &lt; 0.
    */
-  public static DensePoly of(int c, int n) throws IllegalArgumentException {
+  public static DensePoly ofCoefficientDegree(int c, int n) throws IllegalArgumentException {
     if (n < 0) throw new IllegalArgumentException("Can't create a monomial with negative exponent");
     if (c == 0) {
       return ZERO;
@@ -175,7 +175,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
     for (i = 0; i <= smaller.degree(); i++)
       result[i] = smaller.coefficient[i] + larger.coefficient[i];
     for (j = i; j <= larger.degree(); j++) result[j] = larger.coefficient[j];
-    return DensePoly.of(result);
+    return DensePoly.ofCoefficients(result);
   }
 
   /**
@@ -194,7 +194,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
     for (int i = 0; i <= degree(); i++)
       for (int j = 0; j <= q.degree(); j++)
         result[i + j] = result[i + j] + coefficient[i] * q.coefficient[j];
-    return DensePoly.of(result);
+    return DensePoly.ofCoefficients(result);
   }
 
   /**
@@ -224,7 +224,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
     if (isZero()) return this;
     int[] result = new int[coefficient.length];
     for (int i = 0; i <= degree(); i++) result[i] = -coefficient[i];
-    return DensePoly.of(result);
+    return DensePoly.ofCoefficients(result);
   }
 
   // Methods inherited from Object
