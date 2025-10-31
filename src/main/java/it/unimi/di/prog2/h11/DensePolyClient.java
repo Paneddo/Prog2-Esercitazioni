@@ -19,31 +19,33 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.s03;
+package it.unimi.di.prog2.h11;
 
 import java.util.Scanner;
 
-/** Classe per la somma di importi in centesimi. */
-public class SommaCentesimi {
+/** A class to test some methods of {@link DensePoly}. */
+public class DensePolyClient {
 
   /** . */
-  private SommaCentesimi() {}
+  private DensePolyClient() {}
 
   /**
-   * Legge dal flusso di ingresso un elenco di importi in euro e centesimi (uno per riga, con la
-   * parte decimale separata dalla parte intera da un punto) e ne emette nel flusso d'uscita la
-   * somma.
+   * Tests some methods of {@link DensePoly}.
    *
-   * @param args gli argomenti (ignorati) della riga di comando
+   * <p>Starting from term \( t_0 = 0 \) reads a list of \( t_i \) of terms from the standard input,
+   * given as a (coefficient, degree) pairs, and computes the polynomial \( t_0 + t_1 + t_2 \cdots
+   * \), emitting the resulting polynomial in the standard output.
+   *
+   * @param args not used.
    */
   public static void main(String[] args) {
-    int cents = 0;
-    try (Scanner sc = new Scanner(System.in)) {
-      while (sc.hasNextLine()) {
-        String[] parts = sc.nextLine().split("\\.");
-        cents += 100 * Integer.parseInt(parts[0]) + Integer.parseInt(parts[1]);
+    DensePoly result = DensePoly.ZERO;
+    try (Scanner s = new Scanner(System.in)) {
+      while (s.hasNextInt()) {
+        DensePoly term = DensePoly.ofCoefficientDegree(s.nextInt(), s.nextInt());
+        result = result.add(term);
       }
-      System.out.println(cents / 100 + "." + (cents % 100 < 10 ? "0" : "") + cents % 100);
     }
+    System.out.println(result);
   }
 }

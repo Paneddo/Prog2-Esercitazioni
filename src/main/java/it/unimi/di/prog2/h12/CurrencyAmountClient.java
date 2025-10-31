@@ -19,31 +19,30 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.s03;
+package it.unimi.di.prog2.h12;
 
 import java.util.Scanner;
 
-/** Classe per la somma di importi in centesimi. */
-public class SommaCentesimi {
+/** Client class for testing the CurrencyAmount class. */
+public class CurrencyAmountClient {
 
   /** . */
-  private SommaCentesimi() {}
+  private CurrencyAmountClient() {}
 
   /**
-   * Legge dal flusso di ingresso un elenco di importi in euro e centesimi (uno per riga, con la
-   * parte decimale separata dalla parte intera da un punto) e ne emette nel flusso d'uscita la
-   * somma.
+   * Main method for testing.
    *
-   * @param args gli argomenti (ignorati) della riga di comando
+   * <p>Reads a sequence of amounts from the standard input, computes their sum, and emits it to the
+   * standard output.
+   *
+   * @param args command line arguments (not used).
    */
   public static void main(String[] args) {
-    int cents = 0;
-    try (Scanner sc = new Scanner(System.in)) {
-      while (sc.hasNextLine()) {
-        String[] parts = sc.nextLine().split("\\.");
-        cents += 100 * Integer.parseInt(parts[0]) + Integer.parseInt(parts[1]);
-      }
-      System.out.println(cents / 100 + "." + (cents % 100 < 10 ? "0" : "") + cents % 100);
+    CurrencyAmount total = CurrencyAmount.ZERO;
+    try (Scanner scanner = new Scanner(System.in)) {
+      while (scanner.hasNext())
+        total = total.somma(CurrencyAmount.parseCurrencyAmount(scanner.next()));
     }
+    System.out.println(total);
   }
 }

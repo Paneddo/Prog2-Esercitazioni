@@ -28,14 +28,19 @@ import java.util.List;
 public class ListIntSetClient {
 
   /** . */
-  private ListIntSetClient() {}
+  private ListIntSetClient() {
+  }
 
   /**
    * Tests some methods of {@link ListIntSet}.
    *
-   * <p>Given a list of integers as arguments on the command line, builds a set from them, and then
-   * for every element in the list, emits <samp>list</samp> if the element is in the list, then for
-   * every element in the set, emits an <samp>set</samp> if the element is in the list.
+   * <p>
+   * Given a list of integers as arguments on the command line, builds a set from
+   * them, and then
+   * for every element in the list, emits <samp>list</samp> if the element is in
+   * the list, then for
+   * every element in the set, emits an <samp>set</samp> if the element is in the
+   * list.
    *
    * @param args the integers to be used as elements of the list.
    */
@@ -47,10 +52,13 @@ public class ListIntSetClient {
       list.add(x);
       set.insert(x);
     }
-    for (int x : list) if (set.isIn(x)) System.out.println("list");
+    for (int x : list)
+      if (set.isIn(x))
+        System.out.println("list");
     while (set.size() > 0) {
       int x = set.choose();
-      if (list.indexOf(x) != -1) System.out.println("set");
+      if (list.indexOf(x) != -1)
+        System.out.println("set");
       set.remove(x);
     }
   }

@@ -32,113 +32,113 @@ import java.util.List;
  */
 public class ArrayIntSet {
 
-  // Fields
+   // Fields
 
-  /** The initial capacity of the internal array. */
-  private final int INITIAL_CAPACITY = 16;
+   /** The initial capacity of the internal array. */
+   private final int INITIAL_CAPACITY = 16;
 
-  /** The {@link List} containing this set elements. */
-  private int[] els;
+   /** The {@link List} containing this set elements. */
+   private int[] els;
 
-  /** The number of elements in this set. */
-  private int size;
+   /** The number of elements in this set. */
+   private int size;
 
-  // Constructors
+   // Constructors
 
-  /**
-   * Initializes this set to be empty.
-   *
-   * <p>
-   * Builds the set \( S = \varnothing \).
-   */
-  public ArrayIntSet() {
-    els = new int[INITIAL_CAPACITY];
-    size = 0;
-  }
+   /**
+    * Initializes this set to be empty.
+    *
+    * <p>
+    * Builds the set \( S = \varnothing \).
+    */
+   public ArrayIntSet() {
+      els = new int[INITIAL_CAPACITY];
+      size = 0;
+   }
 
-  // Methods
+   // Methods
 
-  /**
-   * Looks for a given element in this set.
-   *
-   * @param x the element to look for.
-   * @return an index {@code i} such that {@code els[i] == x} if the element
-   *         belongs to this set, or
-   *         -1
-   */
-  private int indexOf(int x) {
-    for (int i = 0; i < size; i++) {
-      if (els[i] == x)
-        return i;
-    }
-    return -1;
-  }
+   /**
+    * Looks for a given element in this set.
+    *
+    * @param x the element to look for.
+    * @return an index {@code i} such that {@code els[i] == x} if the element
+    *         belongs to this set, or
+    *         -1
+    */
+   private int indexOf(int x) {
+      for (int i = 0; i < size; i++) {
+         if (els[i] == x)
+            return i;
+      }
+      return -1;
+   }
 
-  /**
-   * Adds the given element to this set.
-   *
-   * <p>
-   * This method modifies the object, that is: \( S' = S \cup \{ x \} \).
-   *
-   * @param x the element to be added.
-   */
-  public void insert(int x) {
-    if (indexOf(x) != -1)
-      return;
-    if (size == els.length)
-      els = Arrays.copyOf(els, els.length * 2);
-    els[size++] = x;
-  }
+   /**
+    * Adds the given element to this set.
+    *
+    * <p>
+    * This method modifies the object, that is: \( S' = S \cup \{ x \} \).
+    *
+    * @param x the element to be added.
+    */
+   public void insert(int x) {
+      if (indexOf(x) != -1)
+         return;
+      if (size == els.length)
+         els = Arrays.copyOf(els, els.length * 2);
+      els[size++] = x;
+   }
 
-  /**
-   * Removes the given element from this set.
-   *
-   * <p>
-   * This method modifies the object, that is: \( S' = S \setminus \{ x \} \).
-   *
-   * @param x the element to be removed.
-   */
-  public void remove(int x) {
-    int i = indexOf(x);
-    if (i == -1)
-      return;
-    els[i] = els[--size];
-  }
+   /**
+    * Removes the given element from this set.
+    *
+    * <p>
+    * This method modifies the object, that is: \( S' = S \setminus \{ x \} \).
+    *
+    * @param x the element to be removed.
+    */
+   public void remove(int x) {
+      int i = indexOf(x);
+      if (i == -1)
+         return;
+      els[i] = els[--size];
+   }
 
-  /**
-   * Tells if the given element is in this set.
-   *
-   * <p>
-   * Answers the question \( x\in S \).
-   *
-   * @param x the element to look for.
-   * @return whether the given element belongs to this set, or not.
-   */
-  public boolean isIn(int x) {
-    return indexOf(x) != -1;
-  }
+   /**
+    * Tells if the given element is in this set.
+    *
+    * <p>
+    * Answers the question \( x\in S \).
+    *
+    * @param x the element to look for.
+    * @return whether the given element belongs to this set, or not.
+    */
+   public boolean isIn(int x) {
+      return indexOf(x) != -1;
+   }
 
-  /**
-   * Returns the cardinality of this set.
-   *
-   * <p>
-   * Responds with \( |S| \).
-   *
-   * @return the size of this set.
-   */
-  public int size() {
-    return size;
-  }
+   /**
+    * Returns the cardinality of this set.
+    *
+    * <p>
+    * Responds with \( |S| \).
+    *
+    * @return the size of this set.
+    */
+   public int size() {
+      return size;
+   }
 
-  /**
-   * Returns an element from this set.
-   *
-   * @return an arbitrary element from this set.
-   * @throws IllegalStateException if this set is empty.
-   */
-  public int choose() throws IllegalStateException {
-    if (size == 0)
-      throw new IllegalStateException("Can't choose from an empty set");
-    return els[0];
-  }
+   /**
+    * Returns an element from this set.
+    *
+    * @return an arbitrary element from this set.
+    * @throws IllegalStateException if this set is empty.
+    */
+   public int choose() throws IllegalStateException {
+      if (size == 0)
+         throw new IllegalStateException("Can't choose from an empty set");
+      return els[0];
+   }
 }

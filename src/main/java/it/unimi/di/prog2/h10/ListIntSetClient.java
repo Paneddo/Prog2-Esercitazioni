@@ -19,32 +19,27 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.h08;
+package it.unimi.di.prog2.h10;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** A class to test some methods of {@link ListIntSet}. */
-public class ArrayIntSetClient {
+public class ListIntSetClient {
 
   /** . */
-  private ArrayIntSetClient() {
-  }
+  private ListIntSetClient() {}
 
   /**
    * Tests some methods of {@link ListIntSet}.
    *
-   * <p>
-   * Given a list of integers as arguments on the command line, builds a set from
-   * them, and then
-   * for every element in the list, emits <samp>list</samp> if the element is in
-   * the list, then for
-   * every element in the set, emits an <samp>set</samp> if the element is in the
-   * list.
+   * <p>Given a list of integers as arguments on the command line, builds a set from them, and then
+   * for every element in the list, emits <samp>list</samp> if the element is in the list, then for
+   * every element in the set, emits an <samp>set</samp> if the element is in the list.
    *
    * @param args the integers to be used as elements of the list.
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     List<Integer> list = new ArrayList<>();
     ListIntSet set = new ListIntSet();
     for (String s : args) {
@@ -52,13 +47,10 @@ public class ArrayIntSetClient {
       list.add(x);
       set.insert(x);
     }
-    for (int x : list)
-      if (set.isIn(x))
-        System.out.println("list");
+    for (int x : list) if (set.isIn(x)) System.out.println("list");
     while (set.size() > 0) {
       int x = set.choose();
-      if (list.indexOf(x) != -1)
-        System.out.println("set");
+      if (list.indexOf(x) != -1) System.out.println("set");
       set.remove(x);
     }
   }
