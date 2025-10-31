@@ -37,6 +37,7 @@ public class SparsePolyClient {
    *             {@code null}.
    * @return a string representation of the polynomial.
    */
+  @SuppressWarnings("unused")
   private static String asString(SparsePoly poly) {
     if (poly.degree() > 0) {
       StringBuilder sb = new StringBuilder("SparsePoly: ");
