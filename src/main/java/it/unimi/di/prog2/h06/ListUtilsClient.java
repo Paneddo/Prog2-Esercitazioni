@@ -25,12 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/** Classe client per {@link ListUtils} */
+/** Classe client per {@link ListUtils}. */
 public class ListUtilsClient {
 
   /** . */
   private ListUtilsClient() {}
-  ;
 
   /**
    * Legge dal flusso di ingresso una lista di stringhe in ordine lessicografico e stampa l'indice

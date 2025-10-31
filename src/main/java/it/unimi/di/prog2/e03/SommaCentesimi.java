@@ -27,7 +27,7 @@ public class SommaCentesimi {
   /** Costruttore privato per impedire l'istanziazione. */
   private SommaCentesimi() {}
 
-  /**
+  /*
    * Scrivere il metodo main che legga dal flusso di ingresso un elenco di importi in euro e
    * centesimi (uno per riga, con la parte decimale separata dalla parte intera da un punto) e ne
    * emetta nel flusso d'uscita la somma.

@@ -39,7 +39,7 @@ public class ArrayIntSetClient {
    *
    * @param args the integers to be used as elements of the list.
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     List<Integer> list = new ArrayList<>();
     ListIntSet set = new ListIntSet();
     for (String s : args) {

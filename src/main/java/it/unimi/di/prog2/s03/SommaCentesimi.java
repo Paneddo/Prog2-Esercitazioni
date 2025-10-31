@@ -40,7 +40,7 @@ public class SommaCentesimi {
     int cents = 0;
     try (Scanner sc = new Scanner(System.in)) {
       while (sc.hasNextLine()) {
-        String parts[] = sc.nextLine().split("\\.");
+        String[] parts = sc.nextLine().split("\\.");
         cents += 100 * Integer.parseInt(parts[0]) + Integer.parseInt(parts[1]);
       }
       System.out.println(cents / 100 + "." + (cents % 100 < 10 ? "0" : "") + cents % 100);
