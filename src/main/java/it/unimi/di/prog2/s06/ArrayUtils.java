@@ -28,7 +28,8 @@ import java.util.Objects;
 public class ArrayUtils {
 
   /** . */
-  private ArrayUtils() {}
+  private ArrayUtils() {
+  }
 
   /**
    * Finds the index (or insertion point) of an integer in an array of integers in increasing order.
@@ -50,9 +51,12 @@ public class ArrayUtils {
     int hi = haystack.length - 1;
     while (lo <= hi) {
       int mid = lo + (hi - lo) / 2;
-      if (needle < haystack[mid]) hi = mid - 1;
-      else if (needle > haystack[mid]) lo = mid + 1;
-      else return mid;
+      if (needle < haystack[mid])
+        hi = mid - 1;
+      else if (needle > haystack[mid])
+        lo = mid + 1;
+      else
+        return mid;
     }
     return -lo - 1;
   }
@@ -73,7 +77,8 @@ public class ArrayUtils {
     if (insertionPoint < 0 || insertionPoint >= array.length) {
       throw new ArrayIndexOutOfBoundsException(insertionPoint);
     }
-    for (int i = array.length - 1; i > insertionPoint; i--) array[i] = array[i - 1];
+    for (int i = array.length - 1; i > insertionPoint; i--)
+      array[i] = array[i - 1];
     array[insertionPoint] = value;
   }
 
@@ -86,7 +91,8 @@ public class ArrayUtils {
    */
   static void fill(int[] array, int value) {
     Objects.requireNonNull(array);
-    for (int i = 0; i < array.length; i++) array[i] = value;
+    for (int i = 0; i < array.length; i++)
+      array[i] = value;
   }
 
   /**
@@ -97,6 +103,7 @@ public class ArrayUtils {
    */
   static void print(int[] array) {
     Objects.requireNonNull(array);
-    for (int i = 0; i < array.length; i++) System.out.println(array[i]);
+    for (int i = 0; i < array.length; i++)
+      System.out.println(array[i]);
   }
 }

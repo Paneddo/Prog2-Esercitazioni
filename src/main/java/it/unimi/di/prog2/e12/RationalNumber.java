@@ -25,9 +25,7 @@ import java.util.Objects;
 
 /**
  * A rational number is an immutable number that can be expressed as the
- * quotient or fraction \( p/q
- * \) of two {@code int}s, a numerator \( p \) and a non-zero denominator \( q
- * \).
+ * quotient or fraction \( \frac{p}{q} \) of two {@code int}s, a numerator \( p \) and a non-zero denominator \( q \).
  */
 public class RationalNumber {
     private final int numerator;
