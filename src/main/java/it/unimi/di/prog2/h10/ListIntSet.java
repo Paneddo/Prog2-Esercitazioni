@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code IntSet}s are mutable, unbounded sets of integers.
+ * {@code ListIntSet}s are mutable, unbounded sets of integers.
  *
  * <p>A typical IntSet is \( S = \{x_1, \ldots, x_n \} \).
  */
