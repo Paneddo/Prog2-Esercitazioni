@@ -22,12 +22,14 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 package it.unimi.di.prog2.e14;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 /** A class to test int ranges. */
 public class IntRangeClient {
 
   /** . */
-  private IntRangeClient() {}
+  private IntRangeClient() {
+  }
 
   /**
    * Prints a description of an iterator on integers.
@@ -76,34 +78,30 @@ public class IntRangeClient {
    * @param args not used.
    */
 
-  /*- Uncomment and complete once you have implemented the range class
+  public static void main(String[] args) {
 
-    public static void main(String[] args) {
+    IntRange range = new IntRange();
 
-      // declare the range...
-
-      try (Scanner sc = new Scanner(System.in)) {
-        while (sc.hasNext()) {
-          char command = sc.next().charAt(0);
-          int value = sc.nextInt();
-          switch (command) {
-            case 'F':
-              // set the from the range
-              break;
-            case 'T':
-              // set the to the range
-              break;
-            case 'S':
-              // set the step the range
-              break;
-            default:
-              throw new IllegalArgumentException("Unknown command: " + command);
-          }
+    try (Scanner sc = new Scanner(System.in)) {
+      while (sc.hasNext()) {
+        char command = sc.next().charAt(0);
+        int value = sc.nextInt();
+        switch (command) {
+          case 'F':
+            range.setFrom(value);
+            break;
+          case 'T':
+            range.setTo(value);
+            break;
+          case 'S':
+            range.setStep(value);
+            break;
+          default:
+            throw new IllegalArgumentException("Unknown command: " + command);
         }
       }
-      Iterator<Integer> it = // get the iterator from the range;
-      printIterationsFirstLast(it);
     }
-
-  */
+    Iterator<Integer> it = range.iterator();
+    printIterationsFirstLast(it);
+  }
 }
