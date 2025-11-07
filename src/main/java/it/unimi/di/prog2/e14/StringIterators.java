@@ -22,6 +22,7 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 package it.unimi.di.prog2.e14;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /** Utility class with some string iterators. */
 public class StringIterators {
@@ -35,8 +36,10 @@ public class StringIterators {
      *
      * @param it an iterator of strings.
      * @return an iterator that returns the strings of even length of {@code it}.
+     * @throws NullPointerException if {@code it} is {@code null}.
      */
     public static Iterator<String> evenIterator(final Iterator<String> it) {
+        Objects.requireNonNull(it);
         return new Iterator<>() {
 
             private String next;
@@ -73,8 +76,10 @@ public class StringIterators {
      *
      * @param it an iterator of strings.
      * @return an iterator that returns the strings of {@code it} in uppercase.
+     * @throws NullPointerException if {@code it} is {@code null}.
      */
     public static Iterator<String> uppercase(final Iterator<String> it) {
+        Objects.requireNonNull(it);
         return new Iterator<>() {
 
             @Override
