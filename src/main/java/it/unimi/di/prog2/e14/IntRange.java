@@ -24,16 +24,9 @@ package it.unimi.di.prog2.e14;
 import java.util.Iterator;
 
 /**
- * Represents a range of integers with a {@code start}, {@code end} (exclusive), and {@code step}.
+ * Represents a range of integers with a {@code start}, {@code end}, and {@code step}.
  *
- * <p>Step can be positive or negative but not zero.<br>
- *
- * <ul>
- *   <li>If the step is positive, {@code start} must be {@literal \( \leq \)} {@code end}.
- *   <li>If the step is negative, {@code start} must be {@literal \( \geq \)} {@code end}.
- * </ul>
- *
- * Iterate over the integers when those conditions are not met will lead to an infinite loop.
+ * <p> Step can be positive or negative but not zero, as that would lead to an infinite loop.
  */
 public class IntRange implements Iterable<Integer> {
 
@@ -44,8 +37,7 @@ public class IntRange implements Iterable<Integer> {
   /*
    * RI:
    *  - step != 0
-   *  ((step > 0) => from <= to)
-   *  ((step < 0) => from >= to)
+   * 
    * AF:
    *  - represents a range of integers from `from` to `to` (exclusive) with a step of `step`
    *
@@ -83,7 +75,8 @@ public class IntRange implements Iterable<Integer> {
    * @throws IllegalArgumentException if {@code step} != 0
    */
   void setStep(int step) {
-    if (step == 0) throw new IllegalArgumentException("Step must be non-zero");
+    if (step == 0)
+      throw new IllegalArgumentException("Step must be non-zero");
 
     this.step = step;
   }
@@ -96,8 +89,10 @@ public class IntRange implements Iterable<Integer> {
 
       @Override
       public boolean hasNext() {
-        if (step < 0) return current > to;
-        else return current < to;
+        if (step > 0)
+          return current < to;
+        else
+          return current > to;
       }
 
       @Override
