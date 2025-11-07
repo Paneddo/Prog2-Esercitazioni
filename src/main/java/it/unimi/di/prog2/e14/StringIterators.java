@@ -26,52 +26,69 @@ import java.util.Iterator;
 /** Utility class with some string iterators. */
 public class StringIterators {
 
-  /** . */
-  private StringIterators() {}
+    /** . */
+    private StringIterators() {
+    }
 
-  /**
-   * Filters even-length strings.
-   *
-   * @param it an iterator of strings.
-   * @return an iterator that returns the strings of even length of {@code it}.
-   */
-  public static Iterator<String> evenIterator(final Iterator<String> it) {
-    return new Iterator<>() {
+    /**
+     * Filters even-length strings.
+     *
+     * @param it an iterator of strings.
+     * @return an iterator that returns the strings of even length of {@code it}.
+     */
+    public static Iterator<String> evenIterator(final Iterator<String> it) {
+        return new Iterator<>() {
 
-      // EXERCISE: complete the implementation
+            private String next;
 
-      @Override
-      public boolean hasNext() {
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
-      }
+            @Override
+            public boolean hasNext() {
+                if (next != null) {
+                    return true;
+                }
+                while (it.hasNext()) {
+                    String candidate = it.next();
+                    if (candidate.length() % 2 == 0) {
+                        next = candidate;
+                        return true;
+                    }
+                }
+                return false;
+            }
 
-      @Override
-      public String next() {
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
-      }
-    };
-  }
+            @Override
+            public String next() {
+                if (!hasNext()) {
+                    throw new IllegalStateException("No more elements");
+                }
+                String result = next;
+                next = null;
+                return result;
+            }
+        };
+    }
 
-  /**
-   * Converts strings to uppercase.
-   *
-   * @param it an iterator of strings.
-   * @return an iterator that returns the strings of {@code it} in uppercase.
-   */
-  public static Iterator<String> uppercase(final Iterator<String> it) {
-    return new Iterator<>() {
+    /**
+     * Converts strings to uppercase.
+     *
+     * @param it an iterator of strings.
+     * @return an iterator that returns the strings of {@code it} in uppercase.
+     */
+    public static Iterator<String> uppercase(final Iterator<String> it) {
+        return new Iterator<>() {
 
-      // EXERCISE: complete the implementation
+            @Override
+            public boolean hasNext() {
+                return it.hasNext();
+            }
 
-      @Override
-      public boolean hasNext() {
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
-      }
-
-      @Override
-      public String next() {
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
-      }
-    };
-  }
+            @Override
+            public String next() {
+                if (!hasNext()) {
+                    throw new IllegalStateException("No more elements");
+                }
+                return it.next().toUpperCase();
+            }
+        };
+    }
 }
