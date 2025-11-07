@@ -28,8 +28,7 @@ import java.util.Scanner;
 public class StringIteratorsClient {
 
   /** . */
-  private StringIteratorsClient() {
-  }
+  private StringIteratorsClient() {}
 
   /*
    * Prints the uppercase version of the lines of even length in the standard input.
@@ -40,8 +39,7 @@ public class StringIteratorsClient {
   public static void main(String[] args) {
     try (Scanner s = new Scanner(System.in)) {
       Iterator<String> it = StringIterators.uppercase(StringIterators.evenIterator(s));
-      while (it.hasNext())
-        System.out.println(it.next());
+      while (it.hasNext()) System.out.println(it.next());
     }
   }
 }

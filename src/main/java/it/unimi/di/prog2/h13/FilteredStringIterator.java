@@ -63,20 +63,17 @@ public class FilteredStringIterator implements Iterator<String> {
 
   @Override
   public boolean hasNext() {
-    if (next != null)
-      return true;
+    if (next != null) return true;
     while (original.hasNext()) {
       next = original.next();
-      if (predicate.test(next))
-        return true;
+      if (predicate.test(next)) return true;
     }
     return false;
   }
 
   @Override
   public String next() {
-    if (!hasNext())
-      throw new NoSuchElementException();
+    if (!hasNext()) throw new NoSuchElementException();
     String result = next;
     next = null;
     return result;

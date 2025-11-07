@@ -24,44 +24,40 @@ package it.unimi.di.prog2.e05;
 /** Utility class for computing mathematical functions. */
 public class MathFunctions {
 
-    /** . */
-    private MathFunctions() {
+  /** . */
+  private MathFunctions() {}
+
+  /*
+   * Specify and implement a method that given a positive number returns an
+   * approximation of its square root.
+   *
+   * Hint: https://en.wikipedia.org/wiki/Bisection_method
+   */
+
+  /**
+   * Funzione che restituisce un'approssimazione della radice quadrata di un numero positivo.
+   *
+   * <p>L'approssimazione deve essere tale che la differenza tra il quadrato del risultato e il
+   * numero di partenza sia minore di {@code 10^-3}.
+   *
+   * @param n il numero di cui calcolare la radice quadrata
+   * @return {@code y : y^2 = n} se {@code n >= 0}, {@code -1} altrimenti
+   */
+  public static double sqrt(double n) {
+    if (n < 0) {
+      return -1;
     }
-
-    /*
-     * Specify and implement a method that given a positive number returns an
-     * approximation of its square root.
-     *
-     * Hint: https://en.wikipedia.org/wiki/Bisection_method
-     */
-
-    /**
-     * Funzione che restituisce un'approssimazione della radice quadrata di un
-     * numero positivo.
-     * 
-     * <p>
-     * L'approssimazione deve essere tale che la differenza tra il quadrato del
-     * risultato e il numero di partenza sia minore di {@code 10^-3}.
-     *
-     * @param n il numero di cui calcolare la radice quadrata
-     * @return {@code y : y^2 = n} se {@code n >= 0}, {@code -1} altrimenti
-     */
-
-    public static double sqrt(double n) {
-        if (n < 0) {
-            return -1;
-        }
-        double low = 0;
-        double high = n / 2 + 1;
-        double mid = (low + high) / 2;
-        while (Math.abs(mid * mid - n) >= 0.001) {
-            if (mid * mid < n) {
-                low = mid;
-            } else {
-                high = mid;
-            }
-            mid = (low + high) / 2;
-        }
-        return mid;
+    double low = 0;
+    double high = n / 2 + 1;
+    double mid = (low + high) / 2;
+    while (Math.abs(mid * mid - n) >= 0.001) {
+      if (mid * mid < n) {
+        low = mid;
+      } else {
+        high = mid;
+      }
+      mid = (low + high) / 2;
     }
+    return mid;
+  }
 }

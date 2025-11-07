@@ -26,37 +26,35 @@ import java.util.Scanner;
 /** Client for the {@link ArrayUtils} class. */
 public class ArrayUtilsClient {
 
-    /** . */
-    private ArrayUtilsClient() {
-    }
+  /** . */
+  private ArrayUtilsClient() {}
 
-    /*
-     * Write a client that reads 10 integers in increasing order from the standard
-     * input and prints the index of the integer passed as argument on the command
-     * line if found.
-     */
+  /*
+   * Write a client that reads 10 integers in increasing order from the standard
+   * input and prints the index of the integer passed as argument on the command
+   * line if found.
+   */
 
-    /**
-     * Main method.
-     * 
-     * @param args Command line arguments: {@code args[0]} the integer to search for
-     */
-
-    public static void main(String[] args) {
-        int[] array = new int[10];
-        try (Scanner sc = new Scanner(System.in)) {
-            for (int i = 0; i < array.length; i++) {
-                if (sc.hasNextInt()) {
-                    array[i] = sc.nextInt();
-                } else {
-                    return;
-                }
-            }
+  /**
+   * Main method.
+   *
+   * @param args Command line arguments: {@code args[0]} the integer to search for
+   */
+  public static void main(String[] args) {
+    int[] array = new int[10];
+    try (Scanner sc = new Scanner(System.in)) {
+      for (int i = 0; i < array.length; i++) {
+        if (sc.hasNextInt()) {
+          array[i] = sc.nextInt();
+        } else {
+          return;
         }
-        int val = Integer.parseInt(args[0]);
-        int searchResult = ArrayUtils.binarySearch(array, val);
-        if (searchResult >= 0) {
-            System.out.println(searchResult);
-        }
+      }
     }
+    int val = Integer.parseInt(args[0]);
+    int searchResult = ArrayUtils.binarySearch(array, val);
+    if (searchResult >= 0) {
+      System.out.println(searchResult);
+    }
+  }
 }

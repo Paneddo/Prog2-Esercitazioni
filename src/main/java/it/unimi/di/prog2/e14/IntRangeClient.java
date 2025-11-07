@@ -28,8 +28,7 @@ import java.util.Scanner;
 public class IntRangeClient {
 
   /** . */
-  private IntRangeClient() {
-  }
+  private IntRangeClient() {}
 
   /**
    * Prints a description of an iterator on integers.

@@ -32,111 +32,112 @@ import java.util.Objects;
  */
 public class BoundedIntQueue {
 
-    // EXERCISE: complete following the specification (with particular attention
-    // to the eventual exceptions) and provide an implementation (including the
-    // equals, hashCode, and toString methods); add methods that are adequate to
-    // the specification. Provide also the RI and AF.
+  // EXERCISE: complete following the specification (with particular attention
+  // to the eventual exceptions) and provide an implementation (including the
+  // equals, hashCode, and toString methods); add methods that are adequate to
+  // the specification. Provide also the RI and AF.
 
-    // Given the boundedness constraint, it is not allowed to use any Java
-    // Collection Framework class. An array can be used to store the elements in a
-    // circular buffer (see https://www.wikiwand.com/en/articles/Circular_buffer).
+  // Given the boundedness constraint, it is not allowed to use any Java
+  // Collection Framework class. An array can be used to store the elements in a
+  // circular buffer (see https://www.wikiwand.com/en/articles/Circular_buffer).
 
-    private final int[] elements;
-    private int head = 0;
-    private int tail = 0;
-    private int size = 0;
+  private final int[] elements;
+  private int head = 0;
+  private int tail = 0;
+  private int size = 0;
 
-    /*
-     * RI: 
-     *  elements != null
-     *  size <= elements.length
-     *  head, tail, size >= 0
-     *  if size > 0 then elements between head and tail are valid elements
-     * 
-     * AF:
-     *  the queue is represented in a circular buffer not longer than size
-     *  head represents the idx of the first element, tail is the idx of the first free spot
-     */
+  /*
+   * RI:
+   *  elements != null
+   *  size <= elements.length
+   *  head, tail, size >= 0
+   *  if size > 0 then elements between head and tail are valid elements
+   *
+   * AF:
+   *  the queue is represented in a circular buffer not longer than size
+   *  head represents the idx of the first element, tail is the idx of the first free spot
+   */
 
-    /**
-     * Creates a new bounded queue with the given capacity.
-     *
-     * @param capacity the capacity of the queue.
-     * @throws IllegalArgumentException if {@code capacity} is negative.
-     */
-    public BoundedIntQueue(int capacity) {
-        if (capacity < 0) {
-            throw new IllegalArgumentException("Negative capacity: " + capacity);
-        }
-        this.elements = new int[capacity];
+  /**
+   * Creates a new bounded queue with the given capacity.
+   *
+   * @param capacity the capacity of the queue.
+   * @throws IllegalArgumentException if {@code capacity} is negative.
+   */
+  public BoundedIntQueue(int capacity) {
+    if (capacity < 0) {
+      throw new IllegalArgumentException("Negative capacity: " + capacity);
     }
+    this.elements = new int[capacity];
+  }
 
-    /**
-     * Adds an element to the queue.
-     *
-     * @param x the element to add.
-     * @throws IllegalStateException if the queue is full.
-     */
-    public void enqueue(int x) {
-        if (size == elements.length) {
-            throw new IllegalStateException("Queue is full");
-        }
-        elements[tail] = x;
-        tail = (tail + 1) % elements.length;
-        size++;
+  /**
+   * Adds an element to the queue.
+   *
+   * @param x the element to add.
+   * @throws IllegalStateException if the queue is full.
+   */
+  public void enqueue(int x) {
+    if (size == elements.length) {
+      throw new IllegalStateException("Queue is full");
     }
+    elements[tail] = x;
+    tail = (tail + 1) % elements.length;
+    size++;
+  }
 
-    /**
-     * Removes the element at the head of the queue.
-     *
-     * @return the element at the head of the queue.
-     * @throws IllegalStateException if the queue is empty.
-     */
-    public int dequeue() {
-        if (size == 0) {
-            throw new IllegalStateException("Queue is empty");
-        }
-        int x = elements[head];
-        head = (head + 1) % elements.length;
-        size--;
-        return x;
+  /**
+   * Removes the element at the head of the queue.
+   *
+   * @return the element at the head of the queue.
+   * @throws IllegalStateException if the queue is empty.
+   */
+  public int dequeue() {
+    if (size == 0) {
+      throw new IllegalStateException("Queue is empty");
     }
+    int x = elements[head];
+    head = (head + 1) % elements.length;
+    size--;
+    return x;
+  }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("BoundedIntQueue: [");
-        for (int i = 0; i < size; i++) {
-            if (i > 0) {
-                sb.append(", ");
-            }
-            sb.append(elements[(head + i) % elements.length]);
-        }
-        sb.append("]");
-        return sb.toString();
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("BoundedIntQueue: [");
+    for (int i = 0; i < size; i++) {
+      if (i > 0) {
+        sb.append(", ");
+      }
+      sb.append(elements[(head + i) % elements.length]);
     }
+    sb.append("]");
+    return sb.toString();
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof BoundedIntQueue other)) {
-            return false;
-        }
-        if (size != other.size) {
-            return false;
-        }
-        for (int i = 0; i < size; i++) {
-            if (elements[(head + i) % elements.length] != other.elements[(other.head + i) % other.elements.length]) {
-                return false;
-            }
-        }
-        return true;
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof BoundedIntQueue other)) {
+      return false;
     }
+    if (size != other.size) {
+      return false;
+    }
+    for (int i = 0; i < size; i++) {
+      if (elements[(head + i) % elements.length]
+          != other.elements[(other.head + i) % other.elements.length]) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(size);
-        for (int i = 0; i < size; i++) {
-            result += Integer.hashCode(elements[(head + i) % elements.length]);
-        }
-        return result;
+  @Override
+  public int hashCode() {
+    int result = Objects.hash(size);
+    for (int i = 0; i < size; i++) {
+      result += Integer.hashCode(elements[(head + i) % elements.length]);
     }
+    return result;
+  }
 }

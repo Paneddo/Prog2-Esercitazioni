@@ -27,8 +27,7 @@ import java.util.Scanner;
 public class RationalNumberClient {
 
   /** . */
-  private RationalNumberClient() {
-  }
+  private RationalNumberClient() {}
 
   /*
    * Tests some methods of {@link BoundedIntQueue}.
@@ -49,7 +48,8 @@ public class RationalNumberClient {
    */
 
   public static void main(String[] args) {
-    RationalNumber expected = new RationalNumber(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+    RationalNumber expected =
+        new RationalNumber(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
     RationalNumber result = new RationalNumber(0, 1);
     try (Scanner sc = new Scanner(System.in)) {
       while (sc.hasNextInt()) {
