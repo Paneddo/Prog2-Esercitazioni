@@ -29,25 +29,20 @@ import java.util.Scanner;
 public class ListUtilsClient {
 
   /** . */
-  private ListUtilsClient() {
-  }
+  private ListUtilsClient() {}
 
   /**
-   * Legge dal flusso di ingresso una lista di stringhe in ordine lessicografico e
-   * stampa l'indice
-   * della stringa passata come argomento sulla linea di comando, oppure -1 se
-   * tale stringa non
+   * Legge dal flusso di ingresso una lista di stringhe in ordine lessicografico e stampa l'indice
+   * della stringa passata come argomento sulla linea di comando, oppure -1 se tale stringa non
    * compare nella lista.
    *
-   * @param args il primo elemento dell'array è la stringa da cercare (ci deve
-   *             essere almeno un
-   *             argomento).
+   * @param args il primo elemento dell'array è la stringa da cercare (ci deve essere almeno un
+   *     argomento).
    */
   public static void main(String[] args) {
     List<String> stringhe = new ArrayList<>();
     try (Scanner sc = new Scanner(System.in)) {
-      while (sc.hasNext())
-        stringhe.add(sc.next());
+      while (sc.hasNext()) stringhe.add(sc.next());
     }
     System.out.println(ListUtils.binarySearch(stringhe, args[0]));
   }

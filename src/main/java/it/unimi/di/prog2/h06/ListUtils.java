@@ -27,8 +27,7 @@ import java.util.List;
 public class ListUtils {
 
   /** Costruttore privato che impedisce l'istanziazione. */
-  private ListUtils() {
-  }
+  private ListUtils() {}
 
   /**
    * Cerca una stringa in una lista ordinata lessicograficamente.
@@ -47,12 +46,9 @@ public class ListUtils {
     while (lo <= high) {
       int mid = lo + high >>> 1;
       String midString = haystack.get(mid);
-      if (needle.compareTo(midString) < 0)
-        high = mid - 1;
-      else if (needle.compareTo(midString) > 0)
-        lo = mid + 1;
-      else
-        return mid;
+      if (needle.compareTo(midString) < 0) high = mid - 1;
+      else if (needle.compareTo(midString) > 0) lo = mid + 1;
+      else return mid;
     }
     return -1;
   }

@@ -26,15 +26,11 @@ import java.util.Objects;
 /**
  * {@code DensePoly}s are immutable polynomials with integer coefficients.
  *
- * <p>
- * A typical {@code Poly} is \( p = c_0 + c_1 x + c_2 x^2 + \cdots + c_n x^n \).
+ * <p>A typical {@code Poly} is \( p = c_0 + c_1 x + c_2 x^2 + \cdots + c_n x^n \).
  */
 public class DensePoly { // we don't extend Cloneable, see EJ 3.13
 
-  /**
-   * The array of coefficients, the {@code coeff[i]} is the coefficient of \( x^i
-   * \).
-   */
+  /** The array of coefficients, the {@code coeff[i]} is the coefficient of \( x^i \). */
   private final int[] coefficient;
 
   /** Initializes this to be the zero polynomial, that is \( p = 0 \). */
@@ -50,10 +46,8 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    * @throws IllegalArgumentException if {@code n} &lt; 0.
    */
   public DensePoly(int c, int n) throws IllegalArgumentException {
-    if (n < 0)
-      throw new IllegalArgumentException("Can't create a monomial with negative exponent");
-    if (c == 0)
-      n = 0;
+    if (n < 0) throw new IllegalArgumentException("Can't create a monomial with negative exponent");
+    if (c == 0) n = 0;
     coefficient = new int[n + 1];
     coefficient[n] = c;
   }
@@ -70,8 +64,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
   /**
    * Returns the degree of this polynomial.
    *
-   * @return the largest exponent with a non-zero coefficient; returns 0 if this
-   *         is the zero {@code
+   * @return the largest exponent with a non-zero coefficient; returns 0 if this is the zero {@code
    *     Poly}.
    */
   public int degree() {
@@ -85,17 +78,14 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
    * @return the coefficient of the considered term.
    */
   public int coeff(int d) {
-    if (d < 0 || d >= coefficient.length)
-      return 0;
-    else
-      return coefficient[d];
+    if (d < 0 || d >= coefficient.length) return 0;
+    else return coefficient[d];
   }
 
   /**
    * Performs polynomial addition.
    *
-   * <p>
-   * If \( p \) is this polynomial, returns \( p + q \).
+   * <p>If \( p \) is this polynomial, returns \( p + q \).
    *
    * @param q the polynomial to add to this one.
    * @return the sum among this and the given polynomial.
@@ -114,25 +104,21 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
     int resultDegree = larger.degree();
     if (degree() == q.degree()) {
       for (int k = degree(); k > 0; k--)
-        if (coefficient[k] + q.coefficient[k] != 0)
-          break;
-        else
-          resultDegree--;
+        if (coefficient[k] + q.coefficient[k] != 0) break;
+        else resultDegree--;
     }
     DensePoly result = new DensePoly(resultDegree); // get a new Poly
     int i;
     for (i = 0; i <= smaller.degree() && i <= resultDegree; i++)
       result.coefficient[i] = smaller.coefficient[i] + larger.coefficient[i];
-    for (int j = i; j <= resultDegree; j++)
-      result.coefficient[j] = larger.coefficient[j];
+    for (int j = i; j <= resultDegree; j++) result.coefficient[j] = larger.coefficient[j];
     return result;
   }
 
   /**
    * Performs polynomial multiplication.
    *
-   * <p>
-   * If \( p \) is this polynomial, returns \( p q \).
+   * <p>If \( p \) is this polynomial, returns \( p q \).
    *
    * @param q the polynomial to multiply by this one.
    * @return the product among this and the given polynomial.
@@ -152,8 +138,7 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
   /**
    * Performs polynomial subtraction.
    *
-   * <p>
-   * If \( p \) is this polynomial, returns \( p - q \).
+   * <p>If \( p \) is this polynomial, returns \( p - q \).
    *
    * @param q the polynomial to subtract from this one.
    * @return the subtraction among this and the given polynomial.
@@ -167,15 +152,13 @@ public class DensePoly { // we don't extend Cloneable, see EJ 3.13
   /**
    * Returns the negate polynomial.
    *
-   * <p>
-   * If \( p \) is this polynomial, returns \( -p \).
+   * <p>If \( p \) is this polynomial, returns \( -p \).
    *
    * @return this polynomial multiplied by \( -1 \).
    */
   public DensePoly minus() {
     DensePoly r = new DensePoly(degree());
-    for (int i = 0; i <= degree(); i++)
-      r.coefficient[i] = -coefficient[i];
+    for (int i = 0; i <= degree(); i++) r.coefficient[i] = -coefficient[i];
     return r;
   }
 }

@@ -25,8 +25,7 @@ package it.unimi.di.prog2.e12;
 public class BoundedIntQueueClient {
 
   /** . */
-  private BoundedIntQueueClient() {
-  }
+  private BoundedIntQueueClient() {}
 
   /*
    * Tests some methods of {@link BoundedIntQueue}.
@@ -43,13 +42,10 @@ public class BoundedIntQueueClient {
     try (java.util.Scanner s = new java.util.Scanner(System.in)) {
       while (s.hasNextInt()) {
         int x = s.nextInt();
-        if (x > 0)
-          queue.enqueue(x);
-        else
-          System.out.println(queue.dequeue());
+        if (x > 0) queue.enqueue(x);
+        else System.out.println(queue.dequeue());
       }
     }
     System.out.println(queue);
   }
-
 }

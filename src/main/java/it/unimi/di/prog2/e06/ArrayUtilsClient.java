@@ -27,8 +27,7 @@ import java.util.Scanner;
 public class ArrayUtilsClient {
 
   /** . */
-  private ArrayUtilsClient() {
-  }
+  private ArrayUtilsClient() {}
 
   /*
    * Receives a size as command line argument, then initializes an array of
@@ -40,7 +39,7 @@ public class ArrayUtilsClient {
 
   /**
    * Main method.
-   * 
+   *
    * @param args Command line arguments: {@code args[0]} the size of the array
    */
   public static void main(String[] args) {
@@ -55,13 +54,11 @@ public class ArrayUtilsClient {
         int index = ArrayUtils.binarySearch(array, value);
         if (index < 0) { // value not found
           int insertionPoint = -index - 1;
-          if (insertionPoint < size)
-            ArrayUtils.insertAt(array, insertionPoint, value);
+          if (insertionPoint < size) ArrayUtils.insertAt(array, insertionPoint, value);
         }
       }
     }
 
     ArrayUtils.print(array);
   }
-
 }
