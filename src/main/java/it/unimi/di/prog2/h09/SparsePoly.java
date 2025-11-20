@@ -47,7 +47,8 @@ public class SparsePoly implements Cloneable {
      * @throws IllegalArgumentException if {@code n} &lt; 0.
      */
     public Term { // using the compact constructor
-      if (degree < 0) throw new IllegalArgumentException("A term cannot have a negative exponent.");
+      if (degree < 0)
+        throw new IllegalArgumentException("A term cannot have a negative exponent.");
       if (coefficient == 0)
         throw new IllegalArgumentException("A term cannot have a zero coefficient.");
     }
@@ -92,8 +93,10 @@ public class SparsePoly implements Cloneable {
   private static int findByDegree(List<Term> lst, int d) {
     for (int i = 0; i < lst.size(); i++) {
       final int degree = lst.get(i).degree;
-      if (degree == d) return i;
-      if (degree > d) return -1;
+      if (degree == d)
+        return i;
+      if (degree > d)
+        return -1;
     }
     return -1;
   }
@@ -105,7 +108,8 @@ public class SparsePoly implements Cloneable {
    * @return the coefficient of the considered term.
    */
   public int coeff(int d) {
-    if (d < 0 || d > degree()) return 0;
+    if (d < 0 || d > degree())
+      return 0;
     int i = findByDegree(terms, d);
     return i != -1 ? terms.get(i).coefficient : 0;
   }
@@ -130,14 +134,19 @@ public class SparsePoly implements Cloneable {
    * @param term the not {@code null} term.
    */
   private static void addTerm(List<Term> lst, Term term) {
-    if (term.coefficient == 0) return;
+    if (term.coefficient == 0)
+      return;
     int i = findByDegree(lst, term.degree);
     if (i != -1) {
       int c = lst.get(i).coefficient + term.coefficient;
-      if (c != 0) lst.set(i, new Term(c, term.degree));
-      else lst.remove(i);
+      if (c != 0)
+        lst.set(i, new Term(c, term.degree));
+      else
+        lst.remove(i);
     } else {
-      for (i = 0; i < lst.size(); i++) if (lst.get(i).degree > term.degree) break;
+      for (i = 0; i < lst.size(); i++)
+        if (lst.get(i).degree > term.degree)
+          break;
       lst.add(i, term);
     }
   }
@@ -154,7 +163,8 @@ public class SparsePoly implements Cloneable {
   public SparsePoly add(SparsePoly q) throws NullPointerException {
     Objects.requireNonNull(q, "The polynomial to add cannot be null.");
     List<Term> result = new LinkedList<>(this.terms);
-    for (Term t : q.terms) addTerm(result, t);
+    for (Term t : q.terms)
+      addTerm(result, t);
     return new SparsePoly(result);
   }
 
@@ -200,7 +210,8 @@ public class SparsePoly implements Cloneable {
    */
   public SparsePoly minus() {
     List<Term> lst = new LinkedList<>();
-    for (Term t : terms) lst.add(new Term(-t.coefficient, t.degree));
+    for (Term t : terms)
+      lst.add(new Term(-t.coefficient, t.degree));
     return new SparsePoly(lst);
   }
 
@@ -210,17 +221,20 @@ public class SparsePoly implements Cloneable {
   }
 
   public boolean equals(SparsePoly p) {
-    if (p == null || this.degree() != p.degree()) return false;
+    if (p == null || this.degree() != p.degree())
+      return false;
 
     for (int i = 0; i < degree(); i++) {
-      if (terms.get(i) != p.terms.get(i)) return false;
+      if (terms.get(i) != p.terms.get(i))
+        return false;
     }
     return true;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (o instanceof SparsePoly) return equals((SparsePoly) o);
+    if (o instanceof SparsePoly)
+      return equals((SparsePoly) o);
 
     return false;
   }
@@ -230,23 +244,34 @@ public class SparsePoly implements Cloneable {
     if (degree() > 0) {
       StringBuilder sb = new StringBuilder("SparsePoly: ");
       int c = coeff(degree());
-      if (c < -1) sb.append("-" + (-c));
-      else if (c == -1) sb.append("-");
-      else if (c > 1) sb.append(c);
+      if (c < -1)
+        sb.append("-" + (-c));
+      else if (c == -1)
+        sb.append("-");
+      else if (c > 1)
+        sb.append(c);
       sb.append("x" + (degree() > 1 ? "^" + degree() : ""));
       for (int d = degree() - 1; d > 0; d--) {
         c = coeff(d);
-        if (c == 0) continue;
-        if (c < -1) sb.append(" - " + (-c));
-        else if (c == -1) sb.append(" - ");
-        else if (c == 1) sb.append(" + ");
-        else sb.append(" + " + c);
+        if (c == 0)
+          continue;
+        if (c < -1)
+          sb.append(" - " + (-c));
+        else if (c == -1)
+          sb.append(" - ");
+        else if (c == 1)
+          sb.append(" + ");
+        else
+          sb.append(" + " + c);
         sb.append("x" + (d > 1 ? "^" + d : ""));
       }
       c = coeff(0);
-      if (c > 0) sb.append(" + " + c);
-      else if (c < 0) sb.append(" - " + (-c));
+      if (c > 0)
+        sb.append(" + " + c);
+      else if (c < 0)
+        sb.append(" - " + (-c));
       return sb.toString();
-    } else return "SparsePoly: " + coeff(0);
+    } else
+      return "SparsePoly: " + coeff(0);
   }
 }

@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e17;
 
+import java.util.Scanner;
+
 /**
  * Allows verification of the behavior of an astronomical system.
  *
@@ -28,23 +30,49 @@ package it.unimi.di.prog2.e17;
  */
 public class AstronomicalSystemClient {
 
-  /** . */
-  private AstronomicalSystemClient() {}
+    /** . */
+    private AstronomicalSystemClient() {
+    }
 
-  /*
-   * Simulates an astronomical system.
-   *
-   * <p>Reads the information of celestial bodies from standard input, and simulates the system for
-   * the number of steps specified as the first argument on the command line; hence it emits on the
-   * standard error the state of the system and the total energy.
-   *
-   * @param args the number of simulation steps.
-   */
+    /*
+     * Simulates an astronomical system.
+     *
+     * <p>Reads the information of celestial bodies from standard input, and simulates the system for
+     * the number of steps specified as the first argument on the command line; hence it emits on the
+     * standard error the state of the system and the total energy.
+     *
+     * @param args the number of simulation steps.
+     */
 
-  /* - uncomment and provide the implementation
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            return;
+        }
 
-  public static void main(String[] args) {
-  }
+        AstronomicalSystem astronomicalSystem = new AstronomicalSystem();
 
-  */
+        int steps = Integer.parseInt(args[0]);
+
+        try (Scanner s = new Scanner(System.in)) {
+            while (s.hasNext()) {
+                boolean isPlanet = s.next().charAt(0) == 'P'; // can be P or S
+                String name = s.next();
+                int x = s.nextInt();
+                int y = s.nextInt();
+                int z = s.nextInt();
+
+                if (isPlanet) {
+                    astronomicalSystem.addBody(new Planet(name, new SpacePoint(x, y, z)));
+                } else {
+                    astronomicalSystem.addBody(new Star(name, new SpacePoint(x, y, z)));
+                }
+            }
+        }
+
+        for (int i = 0; i < steps; i++) {
+            astronomicalSystem.timeStep();
+        }
+
+        System.out.println(astronomicalSystem);
+    }
 }
